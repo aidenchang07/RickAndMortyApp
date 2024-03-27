@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import com.adncoding.network.Character
 import com.adncoding.network.KtorClient
 import com.adncoding.rickandmortyapp.ui.theme.RickAndMortyAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val ktorClient = KtorClient()
