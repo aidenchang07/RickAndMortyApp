@@ -2,39 +2,16 @@ package com.adncoding.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.Logger
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 /**
  * Created by AidenChang 2024/03/25
  */
-class KtorClient {
-    private val client = HttpClient(OkHttp) {
-        defaultRequest { url("https://rickandmortyapi.com/api/") }
-
-        install(Logging) {
-            logger = Logger.SIMPLE
-        }
-
-        install(ContentNegotiation) {
-            json(
-                Json {
-                    ignoreUnknownKeys = true
-                }
-            )
-        }
-    }
-
+class KtorClient @Inject constructor(private val httpClient: HttpClient) {
     suspend fun getCharacter(id: Int): Character {
-        return client.get("character/$id").body()
+        return httpClient.get("character/$id").body()
     }
 }
 

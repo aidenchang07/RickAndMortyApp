@@ -17,11 +17,13 @@ import com.adncoding.network.Character
 import com.adncoding.network.KtorClient
 import com.adncoding.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val ktorClient = KtorClient()
+    @Inject
+    lateinit var ktorClient: KtorClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
